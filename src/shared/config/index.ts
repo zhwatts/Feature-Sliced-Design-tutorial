@@ -9,7 +9,6 @@
  * Get env variable
  * @throwable
  */
-console.log('ENV VARS === ', import.meta.env);
 
 const getEnvVar = (key: string) => {
   if (import.meta.env[key] === undefined) {
