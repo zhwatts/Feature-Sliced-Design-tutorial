@@ -1,30 +1,36 @@
-# React + TypeScript + Vite
+# Feature Sliced Design Tutorial
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repo Is a refactored version of the demo sandbox code, as provided on the [feature sliced design](feature-sliced.design) tutorial page, [https://feature-sliced.design/docs/get-started/tutorial]().
 
-Currently, two official plugins are available:
+**Getting Started**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+_Node 18+ required_
 
-## Expanding the ESLint configuration
+1. Clone Repo
+2. ```
+   npm install
+   ```
+3. ```
+   npm run dev
+   ```
+4. open _localhost:5173_ in your browser of choice
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Ihat was refactored?
 
-- Configure the top-level `parserOptions` property like this:
+- migrated from _Create React App_ to _Vite_
+- Translated Russian comments to English
+- Updates certain libraries to most modern version
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Feature Sliced Design, Overview
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+**\*Feature-Sliced Design** (FSD) is an architectural methodology for scaffolding front-end applications. Simply put, it's a compilation of rules and conventions on organizing code. The main purpose of this methodology is to make the project more understandable and structured in the face of ever-changing business requirements.\*
+
+The **layers** are standardized across all projects and vertically arranged. Modules on one layer can only interact with modules from the layers strictly below. There are currently seven of them (bottom to top):
+
+1. `shared` — reusable functionality, detached from the specifics of the project/business. (e.g. UIKit, libs, API)
+2. `entities` — business entities. (e.g., User, Product, Order)
+3. `features` — user interactions, actions that bring business value to the user. (e.g. SendComment, AddToCart, UsersSearch)
+4. `widgets` — compositional layer to combine entities and features into meaningful blocks. (e.g. IssuesList, UserProfile)
+5. `pages` — compositional layer to construct full pages from entities, features and widgets.
+6. `processes` (deprecated) — complex inter-page scenarios. (e.g., authentication)
+7. `app` — app-wide settings, styles and providers.

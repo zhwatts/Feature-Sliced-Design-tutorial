@@ -1,6 +1,6 @@
 import {StrictMode} from 'react';
 import ReactDOM from 'react-dom/client';
-import App from 'app'; // Assuming the correct path to your App component
+import App from 'app';
 
 const rootElement = document.getElementById('root');
 

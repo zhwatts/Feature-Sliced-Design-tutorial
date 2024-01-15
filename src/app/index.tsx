@@ -3,6 +3,7 @@ import {Routing} from 'pages';
 import {withProviders} from './providers';
 import './index.scss';
 
+// eslint-disable-next-line react-refresh/only-export-components
 const App: React.FC = () => {
   return (
     <div className="app">
@@ -11,4 +12,6 @@ const App: React.FC = () => {
   );
 };
 
-export default withProviders(App);
+const appProviderContext = withProviders(App);
+
+export default appProviderContext;
