@@ -1,8 +1,9 @@
+import React from 'react';
 import {Routing} from 'pages';
-// import {withProviders} from './providers';
+import {withProviders} from './providers';
 import './index.scss';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <div className="app">
       <Routing />
@@ -10,5 +11,4 @@ const App = () => {
   );
 };
 
-// export default withProviders(App);
-export default App;
+export default withProviders(App);

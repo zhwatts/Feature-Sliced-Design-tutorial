@@ -1,13 +1,13 @@
-import { Layout, Row, Col, Typography, Spin, Empty } from "antd"; // ~ "shared/ui/{...}"
-import { variant, list } from "@effector/reflect";
-import { combine } from "effector";
+import {Layout, Row, Col, Typography, Spin, Empty} from 'antd'; // ~ "shared/ui/{...}"
+import {variant, list} from '@effector/reflect';
+import {combine} from 'effector';
 
-import { TasksFilters } from "features/tasks-filters";
-import { ToggleTask } from "features/toggle-task";
-import { TaskRow, taskModel } from "entities/task";
-import styles from "./styles.module.scss";
+import {TasksFilters} from 'features/tasks-filters';
+import {ToggleTask} from 'features/toggle-task';
+import {TaskRow, taskModel} from 'entities/task';
+import styles from './styles.module.scss';
 
-const TasksListPage = () => {
+const TasksListPage: React.FC = () => {
   return (
     <Layout className={styles.root}>
       <Layout className={styles.toolbar}>
@@ -28,7 +28,7 @@ const TasksListPage = () => {
   );
 };
 
-const ListItemView: React.FC<{ task: import("shared/api").Task }> = ({ task }) => {
+const ListItemView: React.FC<{task: import('shared/api').Task}> = ({task}) => {
   return (
     <Col key={task.id} span={24}>
       <TaskRow
@@ -40,26 +40,27 @@ const ListItemView: React.FC<{ task: import("shared/api").Task }> = ({ task }) =
   );
 };
 
-// Использование effector-reflect здесь опционально и некритично в рамках методологии
+// Using effector-reflect here is optional and not critical within the methodology
 const TasksList = list({
   view: ListItemView,
   source: taskModel.$tasksFiltered,
   bind: {},
   mapItem: {
-    task: (task) => task,
+    task: task => task,
   },
 });
-// Использование effector-reflect здесь опционально и некритично в рамках методологии
+
+// Using effector-reflect here is optional and not critical within the methodology
 const PageContent = variant({
   source: combine(
     {
       isLoading: taskModel.$tasksListLoading,
       isEmpty: taskModel.$tasksListEmpty,
     },
-    ({ isLoading, isEmpty }) => {
-      if (isLoading) return "loading";
-      if (isEmpty) return "empty";
-      return "ready";
+    ({isLoading, isEmpty}) => {
+      if (isLoading) return 'loading';
+      if (isEmpty) return 'empty';
+      return 'ready';
     }
   ),
   cases: {

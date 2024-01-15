@@ -12,7 +12,7 @@ export type QueryConfig = {
 
 const setQueryConfig = createEvent<QueryConfig>();
 
-// В каждом эффекте так же может быть своя доп. обработка
+// Additional processing can also be done in each effect
 const getTasksListFx = createEffect(
   (params?: typicodeApi.tasks.GetTasksListParams) => {
     return typicodeApi.tasks.getTasksList(params);
@@ -24,12 +24,12 @@ const getTaskByIdFx = createEffect(
   }
 );
 
-// Можно вынести нормализацию на уровне API
+// Normalization can be moved to the API level
 export const taskSchema = new schema.Entity('tasks');
 export const normalizeTask = (data: Task) => normalize(data, taskSchema);
 export const normalizeTasks = (data: Task[]) => normalize(data, [taskSchema]);
 
-// В рамках демо некритично, но можно хранить и в виде массива без нормализации
+// In the context of the demo, it is not critical, but you can also store it as an array without normalization
 export const tasksInitialState: Record<number, Task> = {};
 export const $tasks = createStore(tasksInitialState)
   .on(
@@ -41,25 +41,25 @@ export const $tasks = createStore(tasksInitialState)
     ...normalizeTask(payload.data).entities.tasks,
   }));
 
-// Можно вынести в отдельную директорию (для хранения нескольких моделей)
+// It is possible to move it to a separate directory (for storing multiple models)
 export const $queryConfig = createStore<QueryConfig>({}).on(
   setQueryConfig,
   (_, payload) => payload
 );
 
-// Можно добавить потенциально debounce логику
+// Potentially, debounce logic can be added
 export const $tasksListLoading = getTasksListFx.pending;
 export const $taskDetailsLoading = getTaskByIdFx.pending;
 
 /**
- * "Список" задач
+ * "List" of tasks
  */
 export const $tasksList = combine($tasks, tasks => Object.values(tasks));
 
 /**
- * Отфильтрованные таски
- * @remark Можно разруливать на уровне эффектов - но тогда нужно подключать дополнительную логику в стор
- * > Например скрывать/показывать таск при `toggleTask` событии
+ * Filtered tasks
+ * @remark It can be resolved at the level of effects - but then additional logic needs to be added to the store
+ * > For example, hiding/showing a task on the `toggleTask` event
  */
 export const $tasksFiltered = combine(
   $tasksList,
@@ -74,7 +74,7 @@ export const $tasksFiltered = combine(
 
 export const $tasksListEmpty = $tasksFiltered.map(list => list.length === 0);
 
-// При желании можно завести отдельный селектор, не завязанный на react биндинги
+// If desired, a separate selector can be introduced, not tied to React bindings
 const useTask = (taskId: number): import('shared/api').Task | undefined => {
   return useUnit($tasks)[taskId];
 };
