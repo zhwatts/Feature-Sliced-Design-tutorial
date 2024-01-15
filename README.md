@@ -34,3 +34,8 @@ The **layers** are standardized across all projects and vertically arranged. Mod
 5. `pages` — compositional layer to construct full pages from entities, features and widgets.
 6. `processes` (deprecated) — complex inter-page scenarios. (e.g., authentication)
 7. `app` — app-wide settings, styles and providers.
+
+![image](https://github.com/zhwatts/Feature-Sliced-Design-tutorial/assets/9981733/4aa5fd21-be93-4f02-bb5f-26b72145f144)
+
+![image](https://github.com/zhwatts/Feature-Sliced-Design-tutorial/assets/9981733/a5241d70-319e-4dde-8021-a399b1b66335)
+
