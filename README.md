@@ -15,7 +15,7 @@ _Node 18+ required_
    ```
 4. open _localhost:5173_ in your browser of choice
 
-## Ihat was refactored?
+## What was refactored?
 
 - migrated from _Create React App_ to _Vite_
 - Translated Russian comments to English
